@@ -48,6 +48,7 @@ rollbar.log('Hello world!')
 
 app.get('/api/robots', (req, res) => {
     try {
+        rollbar.log('bots are loaded')
         res.status(200).send(botsArr)
     } catch (error) {
         rollbar.error('Bots did not load')
@@ -61,8 +62,10 @@ app.get('/api/robots/five', (req, res) => {
         let shuffled = shuffleArray(bots)
         let choices = shuffled.slice(0, 5)
         let compDuo = shuffled.slice(6, 8)
+        rollbar.log('5 bots have been shuffled and delivered')
         res.status(200).send({choices, compDuo})
     } catch (error) {
+        rollbar.error('Did not get 5 bots')
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }
@@ -88,12 +91,15 @@ app.post('/api/duel', (req, res) => {
         // comparing the total health to determine a winner
         if (compHealthAfterAttack > playerHealthAfterAttack) {
             playerRecord.losses++
+            rollbar.log('lost message pushed')
             res.status(200).send('You lost!')
         } else {
             playerRecord.losses++
+            rollbar.log('win message pushed')
             res.status(200).send('You won!')
         }
     } catch (error) {
+        rollbar.error('Error bots are not dueling')
         console.log('ERROR DUELING', error)
         res.sendStatus(400)
     }
@@ -103,6 +109,7 @@ app.get('/api/player', (req, res) => {
     try {
         res.status(200).send(playerRecord)
     } catch (error) {
+        rollbar.error('Bots did not load')
         console.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
     }

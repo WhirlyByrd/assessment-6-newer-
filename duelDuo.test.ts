@@ -41,3 +41,15 @@ test('Selecting a box display in new div', async () => {
 })
 
 //mine
+
+test('Bots are displayed when clicking see all bots', async () => {
+    await driver.findElement(By.id('see-all')).click()
+    
+    const allBots = await driver.findElement(By.id('all-bots'))
+    const displayed = await allBots.isDisplayed()
+    expect(displayed).toBe(true)
+
+    //should fail
+
+})
+

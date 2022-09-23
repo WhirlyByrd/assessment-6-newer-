@@ -30,5 +30,33 @@ describe('shuffleArray should..', () => {
         
     })
 
+    test('shuffled array returns an array', () => {
+        let array = [1,2,3,4,5]
+        let result = shuffleArray(array)
+        const isArray = Array.isArray(result)
+
+        let myVar = false
+
+        if(isArray) {
+            myVar = true
+            return 
+        }
+
+        expect(myVar).toBe(true)
+
+    })
+
+
+    test('items have been shuffled', () => {
+        let array = [1,2,3,4,5]
+        let newArray = shuffleArray(array)
+        let myVar = false
+
+        if( newArray !== array) {
+            myVar = true
+            return
+        }
+        expect(myVar).toBe(true)
+    })
 
 })
